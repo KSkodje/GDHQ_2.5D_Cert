@@ -21,7 +21,7 @@
 .idea/
 
 # GameDevHQ Filebase Plugin
-[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/Plugin/
+Assets/[Gg]ame[Dd]ev[Hh][Qq]/[Ff]ile[Bb]ase/Plugin/
 
 # Visual Studio cache directory
 .vs/
