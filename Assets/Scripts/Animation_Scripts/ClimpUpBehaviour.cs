@@ -22,6 +22,8 @@ public class ClimpUpBehaviour : StateMachineBehaviour
     {
         var player = animator.gameObject.transform.parent.GetComponent<Player>();
         if (player) player.ClimbUpComplete();
+        //TODO: Refactor for Ladder functionality
+        //animator.GetParameter() 
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

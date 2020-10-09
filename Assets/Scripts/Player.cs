@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     private float _hInput;
     [SerializeField] private bool _grabbingLedge = false;
 
+    [SerializeField] private List<string> _keyCards = new List<string>();
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -68,6 +70,11 @@ public class Player : MonoBehaviour
                 _jumping = true;
                 _anim.SetBool("Jumping", _jumping);
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _anim.SetTrigger("Rolling");
+            }
         }
 
         
@@ -102,7 +109,30 @@ public class Player : MonoBehaviour
     public void ClimbUpComplete()
     {
         transform.position = _activeLedge.GetStandPos();
+    }
+
+    public void StandUpComplete()
+    {
         _grabbingLedge = false;
         _anim.SetBool("GrabbingLedge", _grabbingLedge);
+    }
+
+    public void PickupCollectible(Collectible.CollectibleType collectibleType, string identifier)
+    {
+        if (collectibleType == Collectible.CollectibleType.Keycard)
+        {
+            if (_keyCards.Contains(identifier)) return;
+            _keyCards.Add(identifier);
+        }
+    }
+
+    public bool CheckCollectible(ControlPanel.RequiredCollectibleType requiredCollectibleType, string requiredIdentifier)
+    {
+        if (requiredCollectibleType == ControlPanel.RequiredCollectibleType.Keycard)
+        {
+            if (_keyCards.Contains(requiredIdentifier)) return true;
+        }
+        
+        return false;
     }
 }
