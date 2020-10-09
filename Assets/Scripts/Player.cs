@@ -135,4 +135,11 @@ public class Player : MonoBehaviour
         
         return false;
     }
+
+    public void LadderClimb()
+    {
+        //disable playermovement - move through animation
+        //at top signal to anim to stop and climb up
+        _anim.Play("Climbing Ladder");
+    }
 }

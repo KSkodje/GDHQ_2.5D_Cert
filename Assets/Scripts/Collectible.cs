@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public enum CollectibleType { Keycard, }
-    [SerializeField] private CollectibleType _collectibleType;
-    [SerializeField] private string _identifier;
+    public enum CollectibleType { None, Keycard, }
+    [SerializeField] private CollectibleType _collectibleType = CollectibleType.None;
+    [SerializeField] private string _identifier = "";
 
     [SerializeField] private float _rotationSpeed = 10f;
     void Start()

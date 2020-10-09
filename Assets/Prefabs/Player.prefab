@@ -2274,10 +2274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfce54834930ac40828afbf1cf7de11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ledgrabChecker: {fileID: 3538411201441678413}
+  _ledgegrabChecker: {fileID: 3538411201441678413}
   _speed: 15
   _jumpHeight: 2
   _grabbingLedge: 0
+  _keyCards: []
 --- !u!1 &6732935988422239234
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 3786977582647199601}
   - component: {fileID: 5320170298803420487}
   - component: {fileID: 1939226079504433598}
+  - component: {fileID: 1542980410}
+  - component: {fileID: 1542980411}
   m_Layer: 0
-  m_Name: Scifi_Terminal_04
+  m_Name: ControlPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204163731391460706}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.19, y: 75, z: 151.61809}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,3 +81,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1542980410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204163731391460706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3097647, y: 1.9855323, z: 1.0876495}
+  m_Center: {x: 0.27138263, y: 0.99276614, z: 0.43644512}
+--- !u!114 &1542980411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204163731391460706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2495cb1b233d42a4194785c2e40eb78e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _platformToControl: {fileID: 0}
+  _onTheElevator: 0
+  _callToPos: 1
+  _itemRequired: 0
+  _requiredCollectibleType: 0
+  _identifierToAccess: Red
