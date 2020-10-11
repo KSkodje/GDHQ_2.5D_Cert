@@ -33,17 +33,15 @@ public class MovingPlatform : MonoBehaviour
 
     private void Update()
     {
-        _distance = Vector3.Distance(transform.position, _currentTarget.position); // For some reason does NOT work
+        _distance = Vector3.Distance(transform.position, _currentTarget.position);
     }
 
     private IEnumerator ConstantMovement()
     {
-        //Debug.Log(Vector3.Distance(transform.position, _currentTarget.position));
-        _distance = Vector3.Distance(transform.position, _currentTarget.position); // For some reason does NOT work
+        _distance = Vector3.Distance(transform.position, _currentTarget.position);
         _canMove = true;
         while (_canMove)
         {
-            //float distance = Vector3.Distance(transform.position, _currentTarget.position);
             if (_distance < 0.1f)
             {
                 ChangeTargetPosition();

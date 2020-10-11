@@ -159,7 +159,6 @@ public class Player : MonoBehaviour
         _climbingLadder = true;
         float clingDistance = 1f;
         float distance = playerPos.z - ladderPos.position.z;
-        Debug.Log(distance);
         if (distance < 0)
         {
             transform.position = new Vector3(playerPos.x,playerPos.y, ladderPos.position.z - clingDistance);
