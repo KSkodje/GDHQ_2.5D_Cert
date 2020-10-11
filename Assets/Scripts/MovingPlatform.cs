@@ -15,7 +15,7 @@ public class MovingPlatform : MonoBehaviour
     private Transform _currentTarget = null;
     private readonly WaitForSeconds _defaultWait = new WaitForSeconds(5.0f);
     private bool _canMove = false;
-    private float _distance;
+    [SerializeField] private float _distance;
     
     void Start()
     {
@@ -33,19 +33,20 @@ public class MovingPlatform : MonoBehaviour
 
     private void Update()
     {
-        //_distance = Vector3.Distance(transform.position, _currentTarget.position); // For some reason does NOT work
+        _distance = Vector3.Distance(transform.position, _currentTarget.position); // For some reason does NOT work
     }
 
     private IEnumerator ConstantMovement()
     {
         //Debug.Log(Vector3.Distance(transform.position, _currentTarget.position));
+        _distance = Vector3.Distance(transform.position, _currentTarget.position); // For some reason does NOT work
         _canMove = true;
         while (_canMove)
         {
-            float distance = Vector3.Distance(transform.position, _currentTarget.position);
-            if (distance < 0.1f)
+            //float distance = Vector3.Distance(transform.position, _currentTarget.position);
+            if (_distance < 0.1f)
             {
-                _currentTarget = _waypointA ? _waypointB : _waypointA;
+                ChangeTargetPosition();
                 yield return _defaultWait;
             }
 

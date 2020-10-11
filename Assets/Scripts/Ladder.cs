@@ -1,16 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Ledge))]
 public class Ladder : MonoBehaviour
 {
     private bool _isPlayer = false;
+    [SerializeField] private Transform _topOfLadder = null;
+
     [Header("Solid = Can't pass through")]
     [SerializeField] private bool _isSolid = true;
     [SerializeField] private GameObject _solid = null;
+    private Ledge _ledge;
 
     private void Start()
     {
         if (_solid) _solid.gameObject.SetActive(_isSolid);
+        _ledge = GetComponent<Ledge>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,8 +28,7 @@ public class Ladder : MonoBehaviour
         if (!_isPlayer) return;
         if (!Input.GetKeyDown(KeyCode.E)) return;
         var player = other.GetComponent<Player>();
-        player.LadderClimb();
-
+        if (player) player.StartLadderClimb(transform, _topOfLadder.position, _ledge);
     }
     private void OnTriggerExit(Collider other)
     {

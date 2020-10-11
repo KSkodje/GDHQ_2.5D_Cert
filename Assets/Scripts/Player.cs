@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _grabbingLedge = false;
 
     [SerializeField] private List<string> _keyCards = new List<string>();
+    private bool _climbingLadder = false;
+    private Vector3 _ladderTop = Vector3.zero;
 
     void Start()
     {
@@ -42,7 +44,18 @@ public class Player : MonoBehaviour
     {
         
         // No movement while mid-jump
-        
+        if (_climbingLadder)
+        {
+            /*if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _climbingLadder = false;
+                _anim.SetBool("LadderClimb", _climbingLadder);
+                _grabbingLedge = false;
+                _jumping = true;
+            }*/
+            LadderClimb();
+            return;
+        }
         if (_controller.isGrounded)
         {
             if (_jumping)
@@ -57,7 +70,7 @@ public class Player : MonoBehaviour
 
             
             // Flip != mirror
-            if (_hInput != 0)
+            if (_hInput != 0 && !_grabbingLedge)
             {
                 Vector3 facing = transform.localEulerAngles;
                 facing.y = _hInput < 0 ? 180 : 0;
@@ -88,7 +101,7 @@ public class Player : MonoBehaviour
                 _anim.SetTrigger("ClimbUp");
             }
         }
-        else if (!_grabbingLedge)
+        else if (!_grabbingLedge && !_climbingLadder)
         {
             _controller.Move(_direction * _speed * Time.deltaTime);
         }
@@ -136,10 +149,45 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    public void StartLadderClimb(Transform ladderPos, Vector3 ladderTop, Ledge currentLedge)
+    {
+        // Animations could possibly be refined by using Behavior scripts to place Player
+        
+        //(-0.3, 40.9, 145.5) - Ladder: (-0.1, 40.6, 146.5)
+        // distance should be about -1f from left side
+        Vector3 playerPos = transform.position;
+        _climbingLadder = true;
+        float clingDistance = 1f;
+        float distance = playerPos.z - ladderPos.position.z;
+        Debug.Log(distance);
+        if (distance < 0)
+        {
+            transform.position = new Vector3(playerPos.x,playerPos.y, ladderPos.position.z - clingDistance);
+        }
+
+        if (distance > 0)
+        {
+            transform.position = new Vector3(playerPos.x,playerPos.y, ladderPos.position.z + clingDistance);
+        }
+        
+        transform.position += new Vector3(0,0,0);
+        _anim.SetBool("LadderClimb", _climbingLadder);
+        _activeLedge = currentLedge;
+        
+        _ladderTop = new Vector3(ladderTop.x, ladderTop.y, playerPos.z);
+        
+        //TODO: Add logic to fix facing and to allow limiting which direction can be climbed
+    }
+
     public void LadderClimb()
     {
-        //disable playermovement - move through animation
-        //at top signal to anim to stop and climb up
-        _anim.Play("Climbing Ladder");
+        if (_ledgegrabChecker.position.y >= _ladderTop.y)
+        {
+            _climbingLadder = false;
+            _anim.SetBool("LadderClimb", _climbingLadder);
+            _grabbingLedge = true;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, _ladderTop, 3 * Time.deltaTime);
     }
 }
